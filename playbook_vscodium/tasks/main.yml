@@ -1,0 +1,55 @@
+---
+# tasks file for playbook_vscodium
+- name: "Setup VSCodium - The telemetry less"
+  hosts: fedora
+
+  tasks:
+    - name: Add VSCodum repository
+      ansible.builtin.yum_repository:
+        name: gitlab.com_paulcarroty_vscodium_repo
+        description: download.vscodium.com
+        baseurl: https://download.vscodium.com/rpms/
+        enabled: true
+        repo_gpgcheck: true
+        gpgcheck: true
+        gpgkey: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+        metadata_expire: 3600
+
+    - name: Install VSCodium Packages
+      dnf:
+        name:
+          - codium
+        state: present
+
+    - name: Autoremove unneeded packages installed as dependencies
+      dnf:
+        autoremove: true
+
+    - name: Customize vscodium extension
+      ansible.builtin.command: codium --install-extension {{ item }}
+      become: true
+      become_user: "rdevaraj"
+      loop:
+        - amazonwebservices.aws-toolkit-vscode
+        - Dart-Code.dart-code
+        - Dart-Code.flutter
+        - dracula-theme.theme-dracula
+        - golang.go
+        - ms-python.python
+        - ms-toolsai.jupyter
+        - ms-toolsai.jupyter-keymap
+        - ms-toolsai.jupyter-renderers
+        - ms-toolsai.vscode-jupyter-cell-tags
+        - ms-toolsai.vscode-jupyter-slideshow
+        - Pivotal.vscode-boot-dev-pack
+        - Pivotal.vscode-spring-boot
+        - PKief.material-icon-theme
+        - redhat.java
+        - redhat.vscode-yaml
+        - ritwickdey.LiveServer
+        - rust-lang.rust-analyzer
+        - vscjava.vscode-java-debug
+        - vscjava.vscode-spring-boot-dashboard
+        - vscjava.vscode-spring-initializr
+        - zhuangtongfa.material-theme
+        

@@ -1,0 +1,67 @@
+---
+# tasks file for playbook_gnome_debloat
+
+- name: Debload Gnome packages
+  hosts: fedora
+
+  tasks:
+    - name: Debloat Gnome
+      dnf:
+        name:
+          - brltty
+          - cheese
+          - evolution
+          - evolution-ews
+          - evolution-help
+          - gfbgraph
+          - gnome-boxes
+          - gnome-calendar
+          - gnome-contacts
+          - gnome-dictionary
+          - gnome-documents
+          - gnome-getting-started-docs
+          - gnome-initial-setup
+          - gnome-maps
+          - gnome-online-miners
+          - gnome-photos
+          - gnome-remote-desktop
+          - gnome-software
+          - gnome-user-docs
+          - gnome-user-share
+          - gnome-video-effects
+          - gnome-weather
+          - simple-scan
+          - libreoffice-avmedia-backend-gstreamer 
+          - libreoffice-base-core
+          - libreoffice-calc
+          - libreoffice-common
+          - libreoffice-core
+          - libreoffice-draw
+          - libreoffice-gnome
+          - libreoffice-gtk
+          - libreoffice-impress
+          - libreoffice-math
+          - libreoffice-ogltrans
+          - libreoffice-pdfimport
+          - libreoffice-style-galaxy
+          - libreoffice-style-human
+          - libreoffice-writer
+          - totem
+          - tracker-miners
+          - yelp        
+        state: absent
+
+    - name: Ensure nautilus present
+      dnf:
+        name:
+          - nautilus
+        state: present
+
+    - name: remove tracker databases
+      file:
+        name: ~/.cache/tracker
+        state: absent
+
+    - name: Autoremove unneeded packages installed as dependencies
+      dnf:
+        autoremove: true

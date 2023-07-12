@@ -1,0 +1,47 @@
+---
+
+- name: Necessary package
+  hosts: fedora
+
+  tasks:
+    - name: Add Brave repository
+      ansible.builtin.yum_repository:
+        name: brave-browser
+        description: Brave Browser
+        baseurl: https://brave-browser-rpm-release.s3.brave.com/$basearch
+        enabled: true
+
+    - name: Required Packages
+      dnf:
+        name:
+          - alacritty
+          - ansible
+          - borgbackup
+          - brave-browser
+          - duf
+          - elinks
+          - eog
+          - evince
+          - evolution-data-server
+          - firefox
+          - flatpak
+          - gdm
+          - gnome-keyring
+          - gnome-menus
+          - gnome-screenshot
+          - gnome-shell
+          - gnome-tweaks
+          - go
+          - htop
+          - pip
+          - qbittorrent
+          - timeshift
+          - vim
+          - virt-manager
+          - vorta
+          - zsh         
+        state: present
+
+    - name: Autoremove unneeded packages installed as dependencies
+      dnf:
+        autoremove: true
