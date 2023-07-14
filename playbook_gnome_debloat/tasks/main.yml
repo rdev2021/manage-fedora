@@ -46,21 +46,6 @@
           - libreoffice-style-human
           - libreoffice-writer
           - totem
-          - tracker-miners
           - yelp        
         state: absent
 
-    - name: Ensure nautilus present
-      dnf:
-        name:
-          - nautilus
-        state: present
-
-    - name: remove tracker databases
-      file:
-        name: ~/.cache/tracker
-        state: absent
-
-    - name: Autoremove unneeded packages installed as dependencies
-      dnf:
-        autoremove: true
