@@ -25,14 +25,16 @@
           - evolution-data-server
           - firefox
           - flatpak
-          - gdm
+          - gcc
+          # - gdm 
           - gnome-keyring
-          - gnome-menus
-          - gnome-screenshot
-          - gnome-shell
+          # - gnome-menus
+          # - gnome-screenshot
+          # - gnome-shell
           - gnome-tweaks
           - go
           - htop
+          - mariadb # mysql client library
           - pip
           - qbittorrent
           - timeshift
@@ -40,6 +42,11 @@
           - virt-manager
           - vorta
           - zsh         
+        state: present
+
+    - name: Install the 'Development tools' package group
+      ansible.builtin.dnf:
+        name: '@Development tools'
         state: present
 
     - name: Autoremove unneeded packages installed as dependencies
