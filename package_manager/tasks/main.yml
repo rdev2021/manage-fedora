@@ -26,13 +26,10 @@
           - firefox
           - flatpak
           - gcc
-          # - gdm 
           - gnome-keyring
-          # - gnome-menus
-          # - gnome-screenshot
-          # - gnome-shell
           - gnome-tweaks
           - go
+          - kate
           - htop
           - mariadb # mysql client library
           - pip
