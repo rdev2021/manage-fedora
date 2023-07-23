@@ -29,23 +29,35 @@
           - gnome-keyring
           - gnome-tweaks
           - go
-          - kate
           - htop
           - mariadb # mysql client library
+          - neovim
           - pip
           - qbittorrent
           - timeshift
           - vim
-          - virt-manager
           - vorta
           - zsh         
         state: present
 
     - name: Install the 'Development tools' package group
-      ansible.builtin.dnf:
+      dnf:
         name: '@Development tools'
         state: present
 
+    - name: Install the Virtualization packages
+      dnf:
+        name:
+          - virt-manager
+          - qemu-kvm
+          - libvirt-daemon-config-network
+          - libvirt-daemon-kvm
+          - virt-install
+          - virt-viewer
+        state: present
+      notify:
+        - restart libvirt
+ 
     - name: Autoremove unneeded packages installed as dependencies
       dnf:
         autoremove: true
