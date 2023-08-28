@@ -29,6 +29,10 @@
           - gnome-user-share
           - gnome-video-effects
           - gnome-weather
+          - gnome-tour
+          - gnome-connections
+          - gnome-logs
+          - gnome-font-veiwer
           - simple-scan
           - libreoffice-avmedia-backend-gstreamer 
           - libreoffice-base-core
